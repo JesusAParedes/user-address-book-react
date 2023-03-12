@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import UserCard from './UserCard';
 
 function Users() {
  const [users, setUsers] = useState([]);
@@ -29,22 +30,22 @@ function Users() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        
+
         {users.map((user, index) => {
-          return <div>
-            <img src={user.picture.medium} alt='user'/>
-          <li key={index}>{user.name.first} {user.name.last}
-          {isHidden && currentUser === index ? <div> 
-          <p>E-mail: {user.email}</p>
-          <p>Phone: {user.phone}</p>
-          <p>Age: {user.dob.age}</p> 
-          </div> : 
-          <div></div>}
-          
-          <button onClick={() => handleClick(index)}>{isHidden && currentUser === index ? 'Hide Details' : 'Show Details'}</button>
-          </li>
-          </div>
-        })}
+          return <UserCard 
+          first={user.name.first} 
+          last={user.name.last} 
+          pic={user.picture.large} 
+          index={index}
+          isHidden= {isHidden}
+          currentUser= {currentUser}
+          email={user.email}
+          phone={user.phone}
+          age={user.dob.age}
+          handleClick={handleClick}
+          />
+        }
+        )}
       </header>
     </div>
   );
